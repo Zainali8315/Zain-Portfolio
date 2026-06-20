@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1280">
+  <meta name="description" content="Resume of Zain Ul Abideen, Full Stack Developer.">
+  <meta name="theme-color" content="#0f7f80">
+  <title>Resume | Zain Ul Abideen</title>
+  <style>
+    :root { --teal: #0f7f80; --teal-800: #0a7173; --teal-900: #075f61; --teal-100: #dff7f7; --ink: #102326; --muted: #5f7174; --line: #dce8e8; --surface-soft: #f2f8f8; --shadow: 0 24px 70px rgba(3,74,76,.16); --ease: cubic-bezier(.22,1,.36,1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: #edf4f4; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .toolbar { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 14px max(18px, calc((100% - 1120px)/2)); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.94); backdrop-filter: blur(14px); }
+    .brand { font-weight: 900; text-decoration: none; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 16px; border: 1px solid var(--teal); border-radius: 999px; color: #fff; background: var(--teal); text-decoration: none; font-weight: 800; cursor: pointer; font: inherit; transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(15,127,128,.25); }
+    .btn.alt { background: #fff; color: var(--teal); }
+
+    .view-toggle { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--surface-soft); border: 1px solid var(--line); }
+    .view-toggle button { border: 0; background: transparent; padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: .86rem; color: var(--muted); cursor: pointer; font: inherit; transition: background .25s var(--ease), color .25s var(--ease); }
+    .view-toggle button.active { background: var(--teal); color: #fff; }
+
+    main { width: min(1120px, calc(100% - 24px)); margin: 30px auto; }
+    .note { text-align: center; color: var(--muted); font-size: .88rem; margin: 18px 0 30px; }
+
+    /* image view */
+    .resume-shell { overflow: hidden; border-radius: 14px; background: #fff; box-shadow: var(--shadow); }
+    .resume-shell img { width: 100%; }
+
+    /* text view */
+    .resume-doc { display: none; overflow: hidden; border-radius: 14px; background: #fff; box-shadow: var(--shadow); }
+    .resume-doc.active { display: grid; }
+    .resume-shell.hidden { display: none; }
+    .doc-grid { display: grid; grid-template-columns: 290px 1fr; min-height: 100%; }
+
+    .doc-side { background: var(--teal-900); color: #fff; padding: 44px 32px; }
+    .doc-photo { width: 148px; height: 148px; border-radius: 50%; overflow: hidden; margin: 0 auto 28px; border: 4px solid rgba(255,255,255,.25); }
+    .doc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+    .doc-side h2 { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: #92e5e6; margin: 0 0 12px; }
+    .doc-side section { margin-bottom: 30px; }
+    .doc-side p { margin: 0; color: rgba(255,255,255,.82); font-size: .92rem; }
+    .doc-side .doc-edu strong { display: block; font-size: .95rem; margin-bottom: 4px; }
+    .doc-side .doc-edu span { display: block; color: rgba(255,255,255,.7); font-size: .85rem; }
+    .skill-block { margin-bottom: 16px; }
+    .skill-block strong { display: block; font-size: .9rem; margin-bottom: 3px; }
+    .skill-block span { display: block; color: rgba(255,255,255,.72); font-size: .84rem; }
+
+    .doc-main { padding: 44px 40px; }
+    .doc-name { font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 900; letter-spacing: -.02em; margin: 0 0 4px; line-height: 1.05; }
+    .doc-role { display: inline-block; margin: 10px 0 30px; padding: 8px 16px; border-radius: 8px; background: var(--teal-900); color: #fff; font-weight: 800; font-size: .92rem; letter-spacing: .04em; text-transform: uppercase; }
+    .doc-main h2 { font-size: 1.05rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); margin: 0 0 18px; padding-bottom: 10px; border-bottom: 2px solid var(--teal-100); }
+    .doc-project { margin-bottom: 26px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .doc-project:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+    .doc-project h3 { margin: 0 0 8px; font-size: 1.12rem; color: var(--teal-800); }
+    .doc-project .meta { font-size: .86rem; color: var(--muted); margin-bottom: 8px; }
+    .doc-project .meta strong { color: var(--ink); }
+    .doc-project p { margin: 0 0 10px; color: var(--muted); font-size: .94rem; }
+    .doc-project .links { display: flex; flex-wrap: wrap; gap: 16px; font-size: .86rem; font-weight: 800; }
+    .doc-project .links a { color: var(--teal-800); text-decoration: none; }
+    .doc-project .links a:hover { text-decoration: underline; }
+
+    .doc-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 8px; }
+    .doc-contact-grid div { font-size: .9rem; }
+    .doc-contact-label { display: block; color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+    .doc-contact-value { display: block; color: var(--ink); font-weight: 700; }
+    .doc-contact-value-link { display: block; color: var(--teal-800); text-decoration: none; font-weight: 700; }
+    .doc-contact-value-link:hover { text-decoration: underline; }
+
+    @media (max-width: 760px) {
+      .doc-grid { grid-template-columns: 1fr; }
+      .doc-side, .doc-main { padding: 32px 24px; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .actions { justify-content: space-between; }
+    }
+
+    @media print {
+      @page { size: A4; margin: 0; }
+      .toolbar, .note, .view-toggle { display: none !important; }
+      body { background: #fff; }
+      main { width: 100%; margin: 0; }
+      .resume-shell, .resume-doc { box-shadow: none; border-radius: 0; }
+      .resume-doc { display: grid !important; }
+      .resume-shell { display: none !important; }
+      /* Force the desktop two-column layout regardless of viewport width */
+      .doc-grid { grid-template-columns: 240px 1fr !important; }
+      .doc-side, .doc-main { padding: 28px 22px !important; }
+      .doc-photo { width: 110px !important; height: 110px !important; margin-bottom: 20px !important; }
+      .doc-name { font-size: 1.9rem !important; }
+      .doc-project { page-break-inside: avoid; }
+      .doc-side section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="toolbar">
+    <a class="brand" href="index.html">← Portfolio</a>
+    <div class="view-toggle" role="group" aria-label="Resume view">
+      <button type="button" id="btnText" class="active">Text Resume</button>
+      <button type="button" id="btnImage">Image View</button>
+    </div>
+    <div class="actions">
+      <a class="btn alt" href="assets/resume.jpg" download="Zain-Ul-Abideen-Resume.jpg">Download Image</a>
+      <button class="btn" type="button" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </header>
+  <main>
+    <div class="resume-doc active" id="docView">
+      <div class="doc-grid">
+        <aside class="doc-side">
+          <div class="doc-photo">
+            <img src="assets/profile.jpg" alt="Zain Ul Abideen">
+          </div>
+          <section>
+            <h2>Profile</h2>
+            <p>I am a passionate MERN stack developer with strong expertise in full-stack web development and a keen interest in Artificial Intelligence. I am currently pursuing a Software Engineering degree at COMSATS University, Vehari (6th semester). I enjoy building efficient, scalable applications and continuously improving my skills in modern web technologies.</p>
+          </section>
+          <section class="doc-edu">
+            <h2>Education</h2>
+            <strong>Software Engineering</strong>
+            <span>COMSATS University Islamabad, Vehari Campus</span>
+            <span>2023 — 2027</span>
+          </section>
+          <section>
+            <h2>Core Skills</h2>
+            <div class="skill-block">
+              <strong>Frontend</strong>
+              <span>HTML5, CSS3, JavaScript, React.js, Bootstrap</span>
+            </div>
+            <div class="skill-block">
+              <strong>Backend</strong>
+              <span>Node.js, PHP, Laravel</span>
+            </div>
+            <div class="skill-block">
+              <strong>AI &amp; Automation</strong>
+              <span>Python, OpenAI API, Prompt Engineering</span>
+            </div>
+            <div class="skill-block">
+              <strong>Mobile &amp; Data</strong>
+              <span>Flutter, Dart, SQLite, MySQL, SQL</span>
+            </div>
+            <div class="skill-block">
+              <strong>Cloud &amp; Deployment</strong>
+              <span>Docker, Git, Vercel</span>
+            </div>
+            <div class="skill-block">
+              <strong>APIs &amp; Workflow</strong>
+              <span>REST APIs, Postman, SonarQube, Jira</span>
+            </div>
+          </section>
+          <section>
+            <h2>Languages</h2>
+            <p>English — Professional Working Proficiency<br>Urdu — Native / Bilingual Proficiency</p>
+          </section>
+        </aside>
+
+        <div class="doc-main">
+          <h1 class="doc-name">Zain Ul Abideen</h1>
+          <span class="doc-role">Full Stack Developer</span>
+
+          <h2>Projects</h2>
+
+          <article class="doc-project">
+            <h3>1. RentalX — Car Rental Web Application</h3>
+            <div class="meta"><strong>Technologies:</strong> HTML5, CSS3, Vanilla JavaScript, LocalStorage, SessionStorage, GitHub Pages</div>
+            <p>Developed a responsive car-rental web application featuring vehicle filtering, rental-date validation, booking-conflict prevention, showroom pickup, home-delivery requests and simulated JazzCash, Easypaisa, bank-transfer and pay-on-pickup options. Added customer authentication, notifications, booking history, downloadable receipts, favourites, reviews and an administrator dashboard.</p>
+            <div class="links">
+              <a href="https://zainali8315.github.io/RentalX-Live-Demo/" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+              <a href="https://github.com/Zainali8315/RentalX-Live-Demo" target="_blank" rel="noopener noreferrer">Source Code ↗</a>
+            </div>
+          </article>
+
+          <article class="doc-project">
+            <h3>2. AI Resume Screening Agent</h3>
+            <div class="meta"><strong>Technologies:</strong> Python, Tkinter, ttk, Expert System, Weighted Scoring, Greedy Algorithm</div>
+            <p>Developed a desktop-based AI resume screening application that evaluates and ranks candidates according to job requirements, including skills, experience, education, certifications and keywords. Implemented rule-based expert-system logic, weighted scoring, candidate shortlisting and explainable screening results through a graphical user interface.</p>
+            <div class="links">
+              <a href="https://github.com/Zainali8315/AI-Resume-Screening-Agent" target="_blank" rel="noopener noreferrer">Source Code ↗</a>
+            </div>
+          </article>
+
+          <h2 style="margin-top:30px;">Contact</h2>
+          <div class="doc-contact-grid doc-contact-grid-light">
+            <div><span class="doc-contact-label">Phone</span><a href="tel:+923194469297" class="doc-contact-value-link">+92 319 4469297</a></div>
+            <div><span class="doc-contact-label">Email</span><a href="mailto:zainjamil611@gmail.com" class="doc-contact-value-link">zainjamil611@gmail.com</a></div>
+            <div><span class="doc-contact-label">Location</span><span class="doc-contact-value">Vehari, Multan, Punjab</span></div>
+            <div><span class="doc-contact-label">GitHub</span><a href="https://github.com/Zainali8315" target="_blank" rel="noopener noreferrer" class="doc-contact-value-link">github.com/Zainali8315</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-shell hidden" id="imageView">
+      <img src="assets/resume.jpg" alt="Resume of Zain Ul Abideen" width="1024" height="1537">
+    </div>
+
+    <p class="note">Use “Print / Save PDF” to save the resume as a PDF from your browser.</p>
+  </main>
+
+  <script>
+    const btnText = document.getElementById('btnText');
+    const btnImage = document.getElementById('btnImage');
+    const docView = document.getElementById('docView');
+    const imageView = document.getElementById('imageView');
+
+    btnText.addEventListener('click', () => {
+      btnText.classList.add('active');
+      btnImage.classList.remove('active');
+      docView.classList.add('active');
+      imageView.classList.add('hidden');
+    });
+
+    btnImage.addEventListener('click', () => {
+      btnImage.classList.add('active');
+      btnText.classList.remove('active');
+      imageView.classList.remove('hidden');
+      docView.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
