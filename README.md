@@ -20,20 +20,4 @@ A responsive, animated static portfolio website with:
 - `resume.html` — resume page (text + image toggle)
 - `assets/` — put your `profile.jpg` and `resume.jpg` here (not included in this package)
 
-## Free deployment with GitHub Pages
-
-1. Create a new public GitHub repository, for example `zain-portfolio`.
-2. Upload all files and the `assets` folder from this package to the repository root.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment**, select **Deploy from a branch**.
-5. Choose the `main` branch and `/ (root)`, then save.
-6. GitHub will provide a public link similar to:
-   `https://your-username.github.io/zain-portfolio/`
-
-The direct resume link will be:
-`https://your-username.github.io/zain-portfolio/resume.html`
-
-## Alternative deployment with Netlify
-
-Drag the complete extracted folder into Netlify Drop. Netlify will generate a public URL automatically.
 
